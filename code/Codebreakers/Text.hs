@@ -13,6 +13,7 @@
 -- limitations under the License.
 
 {-# LANGUAGE RankNTypes #-}
+{-# LANGUAGE TupleSections #-}
 
 -- |
 -- Module:     Codebreakers.Text
@@ -22,6 +23,7 @@
 
 module Codebreakers.Text
     ( -- * Utility functions
+      countChars,
       permute,
 
       -- * Text lenses
@@ -38,6 +40,7 @@ import           Control.Applicative
 import           Control.Lens
 import           Data.Char
 import           Data.Int
+import qualified Data.Map.Strict as M
 import           Data.Monoid
 import qualified Data.Text.Lazy as Tl
 import           Data.Text.Lazy.Lens
@@ -61,6 +64,12 @@ charAt :: Int64 -> Int64 -> Traversal' Tl.Text Int
 charAt b n =
     textFiltered (\c -> isAsciiLower c || isAsciiUpper c) .
     blocks b . ix n . letter
+
+
+-- | Character counts for the given string.
+
+countChars :: String -> M.Map Char Int
+countChars = M.fromListWith (+) . map (, 1)
 
 
 -- | Traversal for the reduced numeric representation of letters.
