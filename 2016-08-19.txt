@@ -1,0 +1,72 @@
+
+Notizen vom 19.08.2016
+======================
+
+Kurzwiederholung
+----------------
+
+n = 12
+
+    "x ≡ y (mod n)"
+<=> ∃ (k ∈ ℤ). x - y = k*n
+
+x + y ≡ 0 (mod n)  -- additiv
+x*y   ≡ 1 (mod n)  -- multiplikativ
+
+5*x ≡ 2*n + 1 (mod 12)
+5*x ≡ 25 (mod 12)
+x ≡ 5 (mod 12)
+
+5*5 ≡ 1 (mod 12)
+
+Das multiplikative Inverse zu x modulo n existiert genau dann, wenn:
+
+    gcd(x, n) = 1
+    "x und n sind teilerfremd"
+
+4*x ≡ 1 (mod 12)
+Kein Inverses.
+
+Teilerfremd:       2*7, 3
+Nicht teilerfremd: 2*2*3, 3*5
+
+### Die ϕ-Funktion
+
+ϕ(n) ist die Anzahl der unterscheidbaren (!) teilerfremden Ganzzahlen
+modulo n.
+
+Inverse modulo 12:  1,  5,  7, 11,
+                   13, 17, 19, 23, ...
+
+ϕ(12) = 4
+
+
+Verschlüsselung mit Multiplikation
+----------------------------------
+
+encrypt(x) ≡ x*s (mod 26)
+
+y ≡ x*s (mod 26)
+x ≡ y*s' (mod 26)
+
+Asymmetrisch?
+
+
+Multiplikative Inverse finden
+-----------------------------
+
+Randbemerkung:
+    g ≤ abs(x)
+    g ≤ abs(n)
+
+Bezout-Identität:
+    gcd(x, y) = g
+    → ∃ (a, b ∈ ℤ).
+        a*x + b*y = g
+
+Anwendungsmöglichkeit (Existenz):
+    gcd(x, n) = 1
+
+    a*x + (-k)*n = 1
+    a*x - 1 = k*n
+    a*x ≡ 1 (mod n)

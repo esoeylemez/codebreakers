@@ -1,0 +1,70 @@
+
+Codebreakers
+============
+
+Notizen vom 01.07.2016
+----------------------
+
+### Steganografie
+
+Informationen in Bilddaten verstecken:
+
+    RGB: (255, 128, 16)
+    RGB: (17, 99, 0)
+
+    Gerade oder ungerade?
+    255 -> 1 * 2^0 =  1
+    128 -> 0 * 2^1 =  0
+     16 -> 0 * 2^2 =  0
+     17 -> 1 * 2^3 =  8
+     99 -> 1 * 2^4 = 16
+      0 -> 0 * 2^5 =  0
+                  -----
+                     25
+
+### Kryptografie
+
+- Verschlüsselung
+    - Vertraulichkeit von Daten
+- Authentifizierung ("Authorisierung"?)
+    - Identitätsnachweise
+- Integrität und Authentizität
+    - Echtheit von Dokumenten
+
+#### Methoden:
+
+- Verfahren:
+    - Symmetrisch:
+        - Blockchiffren:
+            AES (Rijndael), Blowfish, DES,
+            Enigma, IDEA, Serpent, Twofish, etc.
+        - Stromchiffren:
+            - (A)RC4, ARC4
+            - One-Time-Pad
+            - etc.
+        - Hash-Verfahren: MD4, MD5, SHA1, SHA2, SHA3, etc.
+            - "Key derivation functions":
+                - Empfohlen: scrypt
+                - PBKDF2 (HMAC)
+    - Asymmetrisch:
+        - Verschlüsselung: ElGamal, IES, Merkle, RSA
+        - Signaturverfahren: DH, DSA
+
+- Protokolle:
+    OpenPGP: Standard für Dokumentenverschlüsselung und
+        -authentifizierung
+    SSL: Secure Sockets Layer (SSLv2, SSLv3)
+    TLS: Transport Layer Security
+    WEP: Wireless Encryption Protocol
+    WPA (WPA+TKIP): Wifi Protected Access
+    WPA2 (WPA+CCMP (AES)): Wifi Protected Access
+
+- Prinzipien:
+    - Kerckhoffs-Prinzip: vollständig offen außer dem Schlüssel
+
+
+### Programme
+
+Kommandozeilenrechner: PARI/GP ("gp", "pari", "parigp", "pari-gp", ...)
+Passwort-Generator:    pwgen
+Passwort-Manager:      KeePassX

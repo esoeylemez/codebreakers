@@ -1,0 +1,36 @@
+name:     codebreakers
+version:  0.1.0
+category: Cryptography
+synopsis: Code of the Codebreakers workshop
+
+maintainer:   Ertugrul Söylemez <esz@posteo.de>
+author:       Ertugrul Söylemez <esz@posteo.de>
+copyright:    Copyright 2016 Ertugrul Söylemez
+homepage:     http://hub.darcs.net/esz/codebreakers
+bug-reports:  http://hub.darcs.net/esz/codebreakers/issues
+license:      Apache
+license-file: LICENSE
+
+description:  This package includes the code written as part of the
+    Codebreakers cryptography workshop.
+
+build-type:    Simple
+cabal-version: >= 1.10
+
+source-repository head
+    type:     darcs
+    location: http://hub.darcs.net/esz/codebreakers
+
+
+library
+    build-depends:
+        base                >= 4.8 && < 5,
+        hashable            >= 1.2 && < 2,
+        lens                >= 4.14 && < 5,
+        reflection          >= 2.1 && < 3,
+        unordered-containers >= 0.2 && < 1
+    default-language: Haskell2010
+    ghc-options: -W -fdefer-typed-holes
+    exposed-modules:
+        Codebreakers.Subst
+        Codebreakers.Text

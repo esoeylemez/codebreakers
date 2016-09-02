@@ -1,0 +1,155 @@
+
+Notizen vom 15.07.2016
+======================
+
+Passwort-Kombinatorik
+---------------------
+
+Wähle ein vollständig zufälliges Passwort aus einem Alphabet mit c
+Zeichen der Länge n.  Wie viele mögliche Passwörter gibt es?
+
+    c^n
+
+Beispiel:
+
+    c   = 26
+    n   = 12
+    c^n = 95428956661682176
+
+Entropie in Bits:
+
+    2^H = c^n
+
+    H = n * log c / log 2
+    H = 56.4052766177
+
+
+Klassische Kryptografie (symmetrisch)
+-------------------------------------
+
+### Rot-13
+
+Die Buchstaben des Klartexts werden im Alphabet um 13 Stellen
+verschoben.
+
+    ABCDEFGHIJKLM
+    NOPQRSTUVWXYZ
+
+Klartext:    diesisteintest
+Chiffretext: QVRFVFGRVAGRFG
+
+Keine Verschlüsselung!
+
+
+### Caesar-Verschlüsselung ("Rot-n")
+
+Die Buchstaben des Klartexts werden im Alphabet um n Stellen verschoben.
+
+Beispiel: n = 5
+
+    ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    FGHIJKLMNOPQRSTUVWXYZABCDE
+
+Klartext:    diesisteintest
+Chiffretext: INJXNXYJNSYJXY
+
+
+#### Extrembeispiel: One-Time Pad
+
+Klartext genauso groß wie Schlüssel, Schlüssel zufällig und
+gleichverteilt gewählt.
+
+Chiffretext: P
+Klartext:    ???
+
+Zu wenig Kontext!
+
+      ja   nein
+0  BLUBB   BLAH
+1   BLAH  BLUBB
+
+
+### Substitution
+
+    ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    LIXQADKUEGZRCFYHMJNVTOPBSW
+
+
+### Vigenere
+
+Schlüsselraum der Caesar-Chiffre vergrößern?  Substitution in Blöcken,
+hier als Beispiel mit Verschiebung (Caesar):
+
+Schlüssel:  5, 7, 11
+
+ 5: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    FGHIJKLMNOPQRSTUVWXYZABCDE
+
+ 7: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    HIJKLMNOPQRSTUVWXYZABCDEFG
+
+11: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    LMNOPQRSTUVWXYZABCDEFGHIJK
+
+              11  11
+              7|  7|
+             5|| 5||
+Klartext:    die sis tei nte st
+Chiffretext: IPP XPD YLT SAP XA
+             I   X   Y   S   X
+              P   P   L   A   A
+               P   D   T   P
+
+Angriff: Häufigkeitsanalyse in Gruppen: Finde die Blocklänge heraus, und
+betrachte nur die jeweils ersten Buchstaben von jedem Block.
+
+
+Gleichwertigkeit modulo n
+-------------------------
+
+Wir wählen ein Modul (der Modul, die Moduln) n,
+
+    n = 12
+
+und betrachten alle Ganzzahlen, die sich um ein Vielfaches von n
+unterscheiden, als gleichwertig:
+
+    x ≡ y (mod n)
+    ∃ (k ∈ ℤ). x - y = k*n
+
+Beispiel:
+
+    5 ≡ 17 (mod 12)
+    ∃ (k ∈ ℤ). 5 - 17 = k*12
+    Existiert k?  k = -1
+
+Gegenbeispiel:
+
+    5 ≡ 7 (mod 12)  (falsch!)
+    ∃ (k ∈ ℤ). 5 - 7 = k*12
+    Existiert k?  Nein.
+
+
+#### Beispiel: Caesar-Chiffre
+
+Es gibt n = 26 Buchstaben.  Wir weisen jedem eine Zahl zu:
+
+    A  B  C  D ...  X  Y  Z
+    0  1  2  3 ... 23 24 25
+
+Wir können definieren:
+
+    encrypt s x = x + s
+
+Wenn wir den Buchstaben Y mit dem Schlüssel s = 2 verschlüsseln möchten,
+erhalten wir:
+
+     Y
+    24 + 2 = 26
+    26 ≡ 0 (mod 26)
+         A
+
+     X
+    23 + 7 = 30
+    30 ≡ 4 (mod 26)
+         E
