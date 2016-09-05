@@ -1,0 +1,126 @@
+
+Notizen vom 02.09.2016
+======================
+
+Kurzwiederholung: Modulares Rechnen
+-----------------------------------
+
+x ≡ 26*27 + 3*31 - 29 (mod 29)
+  ≡ 26*27 + 3*31 - 0 (mod 29)
+  ≡ 26*27 + 3*31 (mod 29)
+  ≡ 26*27 + 3*2 (mod 29)
+  ≡ 26*(-2) + 3*2 (mod 29)
+  ≡ (-3)*(-2) + 3*2 (mod 29)
+  ≡ 6 + 6 (mod 29)
+  ≡ 12 (mod 29)
+
+
+Kurzwiederholung: Inverse
+-------------------------
+
+3*x ≡ 1 (mod 26)
+x ≡ 9 (mod n)
+
+4*x ≡ 1 (mod 26)
+x existiert nicht.
+
+13*x ≡ 1 (mod 26)
+x existiert nicht.
+
+93*x ≡ 1 (mod 12827)
+
+
+Eulersche ϕ-Funktion
+--------------------
+
+ϕ(n) ist die Anzahl der Ganzzahlen zwischen 0 und n - 1, die teilerfremd
+zu n sind.
+
+ϕ(2)  = 1
+ϕ(3)  = 2
+ϕ(4)  = 2
+ϕ(5)  = 4
+ϕ(6)  = 2
+ϕ(15) = 8
+ϕ(16) = 8
+ϕ(17) = 16
+ϕ(18) = 6
+
+
+### Formel
+
+1. ϕ(p^e) = (p - 1)*p^(e - 1)  -- p prim
+2. ϕ(x*y) = ϕ(x)*ϕ(y)          -- x, y teilerfremd
+
+Häufiger Sonderfall 1b, wenn Primzahl:
+    ϕ(p) = p - 1  -- p prim
+
+ϕ(6)  = ϕ(2*3) = 1*2 = 2
+ϕ(15) = ϕ(3*5) = 2*4 = 8
+ϕ(16) = ϕ(2^4) = 8
+
+ϕ(12827) = ϕ(101*127)
+         = ϕ(101) * ϕ(127)
+         = 100*126
+         = 12600
+
+
+Inverse
+-------
+
+n = 15
+ϕ(15) = 8
+
+    1, 2, 4,  7, 8, 11, 13, 14
+    1, 8, 4, 13, 2, 11,  7, 14
+
+(-1)*(-1) ≡ 1
+
+(-2)*8 ≡ -1
+(-2)*(-8) ≡ 1
+
+2*7 ≡ 14
+2*7 ≡ -1
+13*7 ≡ 1
+
+11*11 ≡ 121 ≡ 0 + 1
+
+(x * y) * 1/(x * y) ≡ 1
+
+1/(x*y) ≡ 1/x * 1/y
+
+Zahlen, die Kehrwerte besitzen, werden als Einheiten bezeichnet.  ϕ(n)
+ist die Anzahl der Einheiten modulo n.
+
+
+RSA
+---
+
+n    = 12827
+ϕ(n) = 12600
+
+Zwei Einheiten miteinander multipliziert ergibt eine Einheit:
+
+    1/(x*y) ≡ (1/x) * (1/y)
+
+Somit ist auch jede Potenz von jeder Einheit wiederum eine Einheit:
+
+    1/(x^e) ≡ (1/x)^e
+
+Daher hat Potenzierung höchstens eine Periode von ϕ(n), da
+Nicht-Einheiten nicht vorkommen:
+
+    ∀ (k ∈ ℤ).
+        x^e ≡ x^(e + k*ϕ(n))
+
+
+Hausaufgaben
+------------
+
+ϕ(43659)
+
+n = 77
+
+ 3*x ≡ 1 (mod n)
+ 5*x ≡ 1 (mod n)
+11*x ≡ 1 (mod n)
