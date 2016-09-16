@@ -49,6 +49,8 @@ zu n sind.
 
 ### Formel
 
+∀ (e p x y ∈ ℕ)
+
 1. ϕ(p^e) = (p - 1)*p^(e - 1)  -- p prim
 2. ϕ(x*y) = ϕ(x)*ϕ(y)          -- x, y teilerfremd
 
