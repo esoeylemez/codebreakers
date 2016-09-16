@@ -119,10 +119,21 @@ Nicht-Einheiten nicht vorkommen:
 Hausaufgaben
 ------------
 
+ϕ(p^e) = (p - 1)*p^(e - 1)
+       = p^e - p^(e - 1)
+
 ϕ(43659)
+  = ϕ(3^4 * 7^2 * 11)
+  = ϕ(3^4) * ϕ(7^2 * 11)
+  = (3^4 - 3^3) * ϕ(7^2 * 11)
+  = 54 * ϕ(7^2 * 11)
+  = 54 * ϕ(7^2 * 11)
+  = 22680
 
 n = 77
 
- 3*x ≡ 1 (mod n)
- 5*x ≡ 1 (mod n)
-11*x ≡ 1 (mod n)
+ 3*x ≡ 78 (mod n);   x ≡ 26 (mod n)
+ 5*x ≡ 145 (mod n);  x ≡ 29 (mod n)
+11*x ≡ 1 (mod n);    x existiert nicht.
+
+  gcd(11, 77) ≠ 1
