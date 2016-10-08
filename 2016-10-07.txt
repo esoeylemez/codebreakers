@@ -1,0 +1,164 @@
+
+Notizen vom 07.10.2016
+======================
+
+Kurzwiederholung
+----------------
+
+Bezout-Identität:
+    gcd(x, y) = g
+    ∃ (a b ∈ ℤ). a*x + b*y = g
+
+gcd(7, 15) = 1
+    ∃ (a b ∈ ℤ). a*7 + b*15 = 1
+    a = -2
+    b = 1
+
+    -2*7 + b*15 = 1
+
+    13*7 ≡ 1 (mod 15)
+
+ϕ(15)
+  = ϕ(3*5)
+  = ϕ(3) * ϕ(5)
+  = (3 - 1) * (5 - 1)
+  = 2 * 4
+  = 8
+
+### Einheiten
+
+x ist eine "Einheit modulo n", nur wenn:
+
+    gcd(x, n) = 1
+
+Sind x und y Einheiten, dann ist x*y auch eine Einheit.
+Ist x oder y keine Einheit, dann ist x*y keine Einheit.
+
+Ist 4*7 eine Einheit modulo 15?  Ja.
+
+Ist 4*4 eine Einheit modulo 15?  Ja.
+
+Ist 3*4 eine Einheit modulo 15?  Nein.
+
+### Bitte lernen:
+
+  * Einheiten
+  * ϕ(n): Anzahl der Einheiten modulo n
+
+
+Einheiten
+---------
+
+n    = 15
+ϕ(n) = 8
+
+2^x ≡ 2^(x + 4)
+    ≡ 2^x * 2^4
+    ≡ 2^x
+
+2^x ≡ 2^(x + ϕ(n)) (mod n)
+
+### Potenzregel für Einheiten
+
+Gegeben:
+  * Eine Einheit b modulo n,
+  * eine natürliche Zahl x,
+  * eine natürliche Zahl n ≥ 2,
+
+dann:
+    b^x ≡ b^(x + ϕ(n)) (mod n)
+
+### Potenzgesetze:
+
+∀ x e1 e2.
+    x^(e1*e2) = (x^e1)^e2
+
+    ∀ n.
+        x^(e1*e2) ≡ (x^e1)^e2 (mod n)
+
+### Inverse unter Exponenten
+
+∀ k.
+
+    x^1 ≡ x
+        ≡ x^(1 + ϕ(n))
+        ≡ x^(1 + k*ϕ(n))
+
+Ist v ≡ 1 (mod ϕ(n)), dann ist x^v ≡ x (mod n).
+
+Ist e*d ≡ 1 (mod ϕ(n)), dann ist x^(e*d) ≡ x (mod n).
+
+Beispiel:
+    n = 12827
+    e = 11
+    d = 2291
+
+    e*d ≡ 1 (mod 12600)
+
+    ∀ (Einheit x). x^(e*d) ≡ x (mod n)
+
+    (x^e)^d ≡ x (mod n)
+
+Verschlüsselung?
+    x = 7
+
+    y ≡ 7^11 (mod n)
+      ≡ 6212 (mod n)
+
+    y^d ≡ 6212^2291 (mod n)
+        ≡ (7^11)^2291 (mod n)
+        ≡ 7
+
+RSA
+---
+
+1. Wähle zwei Primzahlen p und q, berechne n = p*q.
+2. Wähle e und d, sodass e*d ≡ 1 (mod ϕ(n)).
+3. Veröffentliche n und e.
+
+n und e ergeben den "öffentlichen Schlüssel", während n und d den
+"privaten Schlüssel" ergeben.
+
+### Wahl des Exponenten
+
+Der kleinste mögliche Klartext ist 2.  Wir wählen den Exponenten e,
+sodass 2^e ≥ n ist, denn dann wird das Ergebnis modular reduziert:
+
+    2^e ≥ n
+  →   e ≥ log(n)/log(2)
+
+Sonst wäre es möglich, die ganz normale e-te Wurzel (nicht modular) zu
+ziehen, um y = x^e nach x aufzulösen.
+
+Beispiel für ein schlechtes e:
+    n = 12827
+    e = 7
+    7 ≤ 13.65 (= log(12827)/log(2))
+
+    2^7 = 128
+    128^(1/7) = 2
+
+### Angreifer
+
+Kennt n und e.  d ≡ ?.
+
+    e*d ≡ 1 (mod ϕ(n))
+
+gcd(e, ϕ(n))
+
+Beispiel: gcd(11, ϕ(12827))
+
+    11       | ϕ(12827)
+    ϕ(12827) | 11 mod ϕ(12827)
+
+Hausaufgabe
+-----------
+
+1. Generiere einen RSA-Schlüssel mit 500 < n < 10000.
+2. n = 6109, e = 7, d = ?.
+
+Beim nächsten mal
+-----------------
+
+  * Gruppentheorie,
+  * Chinesischer Restsatz.
