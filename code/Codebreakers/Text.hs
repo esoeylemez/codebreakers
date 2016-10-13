@@ -35,15 +35,15 @@ module Codebreakers.Text
     )
     where
 
-import           Codebreakers.Subst
-import           Control.Applicative
-import           Control.Lens
-import           Data.Char
-import           Data.Int
+import Codebreakers.Subst
+import Control.Applicative
+import Control.Lens
+import Data.Char
+import Data.Int
 import qualified Data.Map.Strict as M
-import           Data.Monoid
+import Data.Monoid
 import qualified Data.Text.Lazy as Tl
-import           Data.Text.Lazy.Lens
+import Data.Text.Lazy.Lens
 
 
 -- | Traversal for blocks of the given length.
