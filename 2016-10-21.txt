@@ -1,0 +1,214 @@
+
+Notizen vom 21.10.2016
+======================
+
+Gleichheit
+----------
+
+∀ x.     x = x
+∀ x y.   x = y → y = x
+∀ x y z. x = y, y = z → x = z
+
+
+Äquivalenzrelationen
+--------------------
+
+≈ ist eine Äquivalenzrelation über der Menge A, wenn gilt:
+
+  - Reflexivität: ∀ (x ∈ A).
+        x ≈ x
+  - Symmetrie: ∀ (x, y ∈ A).
+        x ≈ y → y ≈ x
+  - Transitivität: ∀ (x, y, z ∈ A).
+        x ≈ y, y ≈ z → x ≈ z
+
+Beispiel: = ist eine Äquivalenzrelation (über jeder Menge).
+
+Beispiel: Modulare Äquivalenz (≡n) ist eine Äquivalenzrelation ℤ.
+
+
+Halbgruppen
+-----------
+
+Eine Halbgruppe besteht aus:
+
+  - einer Menge A,
+  - einer Äquivalenzrelation ≈ über A,
+  - einer binären Funktion ⋄ : A² → A
+
+sodass:
+
+  - ∀ x y z. (x ⋄ y) ⋄ z ≈ x ⋄ (y ⋄ z)
+  - ∀ x1 x2 y1 y2.
+        x1 ≈ x2, y1 ≈ y2
+        → x1 ⋄ y1 ≈ x2 ⋄ y2
+
+Wir sagen: (A, ≈, ⋄) ist eine Halbgruppe.
+
+Beispiel: (ℤ, ≡26, +) ist eine Halbgruppe, weil:
+
+  - ℤ ist eine Menge,
+  - ≡26 ist eine Äquivalenzrelation,
+  - + : ℤ² → ℤ
+  - + ist assoziativ,
+  - x1 ≡ x2 (mod 26),
+    y1 ≡ y2 (mod 26)
+    → x1 + y1 ≡ x2 + y2 (mod 26)
+
+"x ≡ y (mod n)" =
+"∃ (k ∈ ℤ). x - y = k*n"
+
+2 ≡ 28 (mod 26)  (weil: 2 - 28 = -1*26)
+7 ≡ 33 (mod 26)
+
+2 + 7 ≡ 28 + 33 (mod 26)
+
+Vorsicht: nicht jede Halbgruppe ist kommutativ!
+
+
+Monoide
+-------
+
+Eine Halbgruppe (A, ≈, ⋄) ist ein Monoid, wenn:
+
+  - ∃ (id ∈ A).
+      ∀ x. id ⋄ x ≈ x
+      ∀ x. x ⋄ id ≈ x
+
+Beispiel: (ℤ, =, +) ist ein Monoid, weil:
+
+  - id = 0
+    Beispiel:  0 + 5 = 5, 5 + 0 = 5
+    Beispiel:  0 + 3 = 3, 3 + 0 = 3
+
+Beispiel: (ℤ, =, *) ist ein Monoid, weil id = 1.
+
+Beispiel: (ℤ^(2*2), =, *) (Matrixmultiplikation) ist ein Monoid, weil:
+
+  - * ist assoziativ,
+  - id = [1, 0; 0, 1]
+    ∀ x. x * [1, 0; 0, 1] = x
+    ∀ x. [1, 0; 0, 1] * x = x
+
+Nicht kommutatives Monoid!
+
+Beispiel: (ℤ, ≡26, +) ist ein Monoid, weil:
+
+  - id = 0
+    ∀ x. x + 0 ≡ x (mod 26)
+    ∀ x. 0 + x ≡ x (mod 26)
+
+Was ist denn mit:
+
+  - id = 26?
+    ∀ x. x + 26 ≡ x (mod 26)  (∃ (k ∈ ℤ). (x + 26) - x = k*26,
+                               k = 1)
+    ∀ x. 26 + x ≡ x (mod 26)  (∃ (k ∈ ℤ). (26 + x) - x = k*26,
+                               k = 1)
+
+In jedem Monoid gilt: Sind id1, id2 neutral, dann gilt: id1 ≈ id2.
+
+  ∀ x. id1 ⋄ x ≈ x
+  ∀ x. x ⋄ id1 ≈ x
+
+  ∀ x. id2 ⋄ x ≈ x
+  ∀ x. x ⋄ id2 ≈ x
+
+  (1)  id1 ⋄ id2 ≈ id1
+  (2)  id1 ⋄ id2 ≈ id2
+  (3)  (1) → id1 ≈ id1 ⋄ id2  (sym)
+  (4)  (3), (2) → id1 ≈ id2  (trans)
+  Ziel: id1 ≈ id2
+
+"id1 ≈ id1 ⋄ id2 ≈ id2" = "id1 ≈ id1 ⋄ id2, id1 ⋄ id2 ≈ id2"
+
+
+Inverse
+-------
+
+Gegeben: ein Monoid (A, ≈, ⋄).  Gilt
+
+  - x ⋄ y ≈ id,
+  - y ⋄ x ≈ id,
+
+dann bezeichnen wir x und y als *invers* zueinander.
+
+(ℤ, =, +):  3 + (-3) = 0
+(ℤ, =, *):  1 * 1 = 1, (-1) * (-1) = 1
+
+In jedem Monoid ist id invers zu sich selbst, per Definition:
+
+  id ⋄ id ≈ id
+
+Elemente, die ein Inverses besitzen, bezeichnen wir als *Einheiten*.
+
+
+Gruppen
+-------
+
+Ein Monoid (A, ≈, ⋄) ist eine Gruppe, wenn:
+
+  - jedes Element eine Einheit ist.
+
+(ℤ, =, +): Gruppe?  Existiert zu jeder Ganzzahl x eine Ganzzahl y,
+sodass x + y = 0?  Ja: y = -x.
+
+(ℕ, =, +): Gruppe?  Nein: x = 1 hat kein Inverses.
+
+(ℤ, =, *): Gruppe?  Nein: x = 5 hat kein Inverses.
+
+(ℚ, =, *): Gruppe?  Nein: x = 0 hat kein Inverses.
+
+(ℚ\{0}, =, *):  Gruppe?  Ja:  y = 1/x.
+
+
+Monoid-Homomorphismen
+---------------------
+
+(oder einfach: Monoid-Morphismen)
+
+Eine Funktion f : A → B ist ein Monoid-Homomorphismus von (A, ≈, ⋄)
+nach (B, ~, ∘), wenn gilt:
+
+  - f(x ⋄ y) ~ f(x) ∘ f(y)
+  - f(id) ~ id
+
+Beispiel: Die Identitätsfunktion I(x) = x ist ein Monoid-Morphismus von
+(ℤ, =, +) nach (ℤ, =, +), weil:
+
+  - I(x + y) = x + y
+               x + y = I(x) + I(y)
+    → I(x + y) = I(x) + I(y)
+  - I(0) = 0
+
+Wenn f ein Monoid-Morphismus von (A, ≈, ⋄) nach (B, ~, ∘) ist, dann
+schreiben wir:
+
+    f : (A, ≈, ⋄) → (B, ~, ∘)
+
+Daher schreiben wir:
+
+    I : (ℤ, =, +) → (Z, =, +)
+
+Ist I : (ℤ, =, +) → (ℤ, =, *) ein Monoid-Morphismus? Nein:
+
+    I(x + y) ≠ I(x) * I(y)  (Gegenbeispiel: x = 1, y = 1)
+    I(0) ≠ 1
+
+Für ein beliebiges Monoid M = (A, ≈, ⋄), ist I : M → M ein
+Monoid-Morphismus?  Ja.
+
+    I(x ⋄ y) ≈ I(x) ⋄ I(y)
+    x ⋄ y ≈ x ⋄ y  (refl)
+
+    I(id) ≈ id
+    id ≈ id  (refl)
+
+Beispiel:  f(x) = 2^x.  Ist f ein Monoid-Morphismus von (ℕ, =, +) nach
+(ℤ, =, *)?  Ja.
+
+  - 2^(x + y) = 2^x * 2^y
+  - 2^0 = 1
+
+Hausaufgabe:  f(x) = log(x)/log(2).  Ist f ein Monoid-Morphismus von
+(ℤ, =, *) nach (ℕ, =, +).
