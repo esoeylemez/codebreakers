@@ -211,4 +211,4 @@ Beispiel:  f(x) = 2^x.  Ist f ein Monoid-Morphismus von (ℕ, =, +) nach
   - 2^0 = 1
 
 Hausaufgabe:  f(x) = log(x)/log(2).  Ist f ein Monoid-Morphismus von
-(ℤ, =, *) nach (ℕ, =, +).
+(ℤ, =, *) nach (ℕ, =, +)?
