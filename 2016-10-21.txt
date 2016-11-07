@@ -178,10 +178,10 @@ Monoid-Homomorphismen
 
 (oder einfach: Monoid-Morphismen)
 
-Eine Funktion f : A → B ist ein Monoid-Homomorphismus von (A, ≈, ⋄)
-nach (B, ~, ∘), wenn gilt:
+Eine Funktion f : A → B ist ein Monoid-Homomorphismus vom Monoid (A, ≈,
+⋄) zum Monoid (B, ~, ∘), wenn gilt:
 
-  - f(x ⋄ y) ~ f(x) ∘ f(y)
+  - ∀ x y. f(x ⋄ y) ~ f(x) ∘ f(y)
   - f(id) ~ id
 
 Beispiel: Die Identitätsfunktion I(x) = x ist ein Monoid-Morphismus von
