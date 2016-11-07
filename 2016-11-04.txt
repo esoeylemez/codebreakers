@@ -1,0 +1,102 @@
+
+Notizen vom 04.11.2016
+======================
+
+Kurzwiederholung
+----------------
+
+Halbgruppen?
+  - Ja: (ℕ, =, +).
+  - Ja: ({0, 1}, =, xor).
+  - Nein: (ℤ, =, -), weil - nicht assoziativ.
+  - Ja: (ℤ, =, max).
+  - Ja: (ℤ, =, min).
+  - Ja: (ℕ → ℕ, =, +).
+  - Ja: (A → A, =, ∘).
+    wobei: (f ∘ g)(x) := f(g(x))
+
+    "f = g": ∀ x. f(x) = g(x)
+
+    Assoziativ, weil:
+        ∀ f g h x.
+            ((f ∘ g) ∘ h)(x) = (f ∘ (g ∘ h))(x)
+            (f ∘ g)(h(x)) = f((g ∘ h)(x))
+            f(g(h(x))) = f(g(h(x)))
+  - Nein: (ℤ, <, +).
+
+Hausaufgabe:  f(x) = log(x)/log(2).  Ist f ein Monoid-Morphismus von
+(ℤ, =, *) nach (ℕ, =, +)?
+
+    f : ℤ → ℕ
+    f : (ℤ, =, *) → (ℕ, =, +)
+
+  - ∀ x y. log(x * y)/log(2) = (log(x) + log(y))/log(2)
+  - 0 = 0
+
+    f(-1) = log(-1)/log(2)  (??)
+    2^x = -1?
+
+f : ℕ\{0} → ℝ
+f(x) = log(x)/log(2)
+
+f : (ℕ\{0}, =, *) → (ℝ, =, +)
+  - ∀ x y. log(x * y)/log(2) = (log(x) + log(y))/log(2)
+  - log(1)/log(2) = 0
+
+Beispiel:
+    (A*, =, ++)
+    (ℕ, =, +)
+
+    len : A* → ℕ
+    len([1,2,3]) = 3
+    len([4,3,2]) = 3
+    len([]) = 0
+
+    len : (A*, =, ++) → (ℕ, =, +)?
+
+      - ∀ x y. len(x ++ y) = len(x) + len(y)
+      - len([]) = 0
+
+
+Produktmonoide
+==============
+
+M = (A, ≈, ⋄)
+N = (B, ~, ∘)
+
+M × N = ((A × B), (≈ × ~), (⋄ × ∘))
+
+
+Kartesisches Produkt
+--------------------
+
+A = {2, 3, 5}
+B = {7, 4}
+
+A × B =
+    { (2, 7), (2, 4),
+      (3, 7), (3, 4),
+      (5, 7), (5, 4) }
+
+x ∈ C, y ∈ D → (x, y) ∈ C × D
+(x, y) ∈ C × D → x ∈ C, y ∈ D
+
+
+Gleichwertigkeit
+----------------
+
+Wir definieren die Äquivalenzrelation ? für Paare aus A und B:
+
+    ? := ≈ × ~
+
+(a1, b1) ? (a2, b2) :<=> a1 ≈ a2, b1 ~ b2
+
+
+Operation
+---------
+
+Wir definieren die Operation ! für Paare aus A und B:
+
+    ! := ⋄ × ∘
+
+(a1, b1) ! (a2, b2) := (a1 ⋄ a2, b1 ∘ b2)
