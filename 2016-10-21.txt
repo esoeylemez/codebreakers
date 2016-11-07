@@ -142,6 +142,17 @@ In jedem Monoid ist id invers zu sich selbst, per Definition:
 
 Elemente, die ein Inverses besitzen, bezeichnen wir als *Einheiten*.
 
+(ℕ, =, +):
+    1 ist keine Einheit.
+    2 ist keine Einheit.
+    0 ist eine Einheit.
+
+(ℚ, =, *):
+    1 ist eine Einheit, weil: 1 * 1 = 1.
+    2 ist eine Einheit, weil: 2 * 1/2 = 1.
+    1/2 ist eine Einheit, weil: 1/2 * 2 = 1.
+    0 ist keine Einheit.
+
 
 Gruppen
 -------
