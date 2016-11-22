@@ -1,0 +1,212 @@
+
+Notizen vom 18.11.2016
+======================
+
+Verwendung:
+    Verschlüsselung
+      - Mails,
+      - WhatsApp,
+      - TextSecure,
+      - Festplatte (Hardware),
+      - EncFS,
+      - OpenPGP,
+      - Threema,
+      - XMPP (OTR, OMEMO, OpenPGP),
+      - TLS (HTTPS),
+      - SSH,
+      - (EC-Karten),
+      - HBCI.
+
+    Signaturen
+      - Mails,
+      - Personalausweis,
+      - ELSTER (per Zertifikat, Elias?),
+      - DeMail.
+
+Filmempfehlung von Rolf: A Good American
+
+
+Klassische Kryptografie
+-----------------------
+
+Verschlüsseln heißt:
+  - Inhalt (!) verstecken,
+  - Vertraulichkeit schützen,
+  - geschützter Kanal für Kommunikation.
+
+Steganografie heißt: die Nachricht selbst verstecken, bzw. die Tatsache
+der Kommunikation selbst verschleiern.  Beispiele:
+  - Nachricht im Rauschen eines Bildes oder eines Tons verstecken,
+
+
+### Beispiel: Rot-13
+
+Beispiel für "Verschlüsselung":  Man verschiebe jeden Buchstaben im
+Alphabet um 13 Stellen (Rot-13):
+
+    ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    NOPQRSTUVWXYZABCDEFGHIJKLM
+
+    Klartext:    dies ist ein geheimtext
+    Chiffretext: QVRF VFG RVA TRURVZGRKG
+
+Kerckhoffs-Prinzip: dem Angreifer ist das Verfahren bekannt!
+
+Daher ist das Verfahren Rot-13 kein Verschlüsselungsverfahren, sondern
+eine Kodierung.
+
+
+### Beispiel: Rot-k (bzw. Caesar-Chiffre)
+
+Verschiebe jeden Buchstaben im Alphabet um k Stellen:
+
+    k = 12
+
+    ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    MNOPQRSTUVWXYZABCDEFGHIJKL
+
+    Klartext:    dies ist ein geheimtext
+    Chiffretext: PUQE UEF QUZ SQTQUYFQJF
+
+Nicht sicher, weil: nur 26 Möglichkeiten.
+
+
+### Beispiel: Substitutions-Chiffre
+
+Ersetze die Buchstaben nach einer Substitutionstabelle
+
+    ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    UGVJMYKCDQEZONXSLWAPFHRITB
+
+Wie viele mögliche Schlüssel gibt es?  26! = 26 * 25 * 24 * ... * 1
+
+    Klartext:    dies ist ein geheimtext
+    Chiffretext: JDMA DAP MDN KMCMDOPMIP
+
+    Häufigkeiten:
+      5  M
+      4  D
+      3  P
+      2  A
+
+https://github.com/esoeylemez/codebreakers
+ertes <esz@posteo.de>
+
+
+Verbesserungsvorschlag: Vigenere
+--------------------------------
+
+    k1 =  5
+    k2 =  7
+    k3 = 10
+
+        ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    k1: FGHIJKLMNOPQRSTUVWXYZABCDE (Verschiebung um  5)
+
+        ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    k2: HIJKLMNOPQRSTUVWXYZABCDEFG (Verschiebung um  7)
+
+        ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    k3: KLMNOPQRSTUVWXYZABCDEFGHIJ (Verschiebung um 10)
+
+    Klartext:    die|s i|st |ein| ge|hei|mte|xt
+    Chiffretext: IPO|X S|XA |JPX| NO|MLS|RAO|CA
+
+    Klartext:    dies ist ein geheimtext
+    Chiffretext: IPOX SXA JPX NOMLSRAOCA
+
+    IPO|X S|XA |JPX| NO|MLS|RAO|CA
+
+    1: IXXJ MRC
+    2: P APNLAA
+    3: OS XOSO
+
+Auch kein sicheres Verfahren, trotz ausreichend großem Schlüsselraum.
+
+Sonderfall:
+  - Gruppenlänge = Textlänge,
+  - nur einmal verwenden,
+  - zufällige, unabhängige Schlüssel für jeden Buchstaben.
+
+    "Exklusiv-Oder"
+    00111101101111000001101
+    11010110001010100000011
+    -----------------------
+    11101011100101100001110
+
+    "One-time pad"
+
+
+Modulare Arithmetik
+===================
+
+Sonderfall: Uhrzeigerarithmetik
+-------------------------------
+
+Wir betrachten alle Zahlen, die sich durch ein Vielfaches von 12
+unterscheiden, als gleichwertig:
+
+      2 ≡ 14 (mod 12)
+     -6 ≡ 42 (mod 12)
+    173 ≡ 53 (mod 12)
+
+Wir schreiben allgemeiner,
+
+    x ≡ y (mod 12)
+
+wenn wir x und y als gleichwertig betrachten.
+
+Mit anderen Worten: die Differenz zwischen zwei gleichwertigen Zahlen
+ist ein Vielfaches von 12.
+
+      2 - 14 = -1 * 12 = -12
+     -6 - 42 = -4 * 12 = -48
+    173 - 53 = 10 * 12 = 120
+
+Wir dürfen Zahlen immer durch gleichwertige Zahlen ersetzen, ohne dass
+sich das Ergebnis ändert:
+
+      11 + 14 + 121 + 1212
+    ≡ -1 +  2 +   1 +    0
+    ≡ 2
+
+
+Caesar-Chiffre arithmetisch
+---------------------------
+
+     A  B  C  D  E  F  G  H  I  J  K  L  M
+     0  1  2  3  4  ...
+
+     N  O  P  Q  R  S  T  U  V  W  X  Y  Z
+    13                        ... 23 24 25
+
+encrypt : ℤ × ℤ → ℤ
+encrypt(k, x) = x + k
+
+encrypt(13,  2) = 15
+encrypt(13, 25) = 38
+
+    38 ≡ 12 (mod 26)
+
+encrypt(13, 25)
+    ≡ 13 + 25
+    ≡ 13 - 1
+    ≡ 12
+
+
+Neue Chiffre
+------------
+
+encrypt(x) = 5*x
+
+
+Weiteres
+========
+
+Hausaufgabe:
+    files/hausaufgabe-2016-07-15.txt
+    Vigenere-Chiffre
+
+Mächtiger Kommandozeilenrechner:
+    PARI/GP
+    http://pari.math.u-bordeaux.fr/
