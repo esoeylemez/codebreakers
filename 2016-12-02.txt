@@ -1,0 +1,259 @@
+
+Notizen vom 02.12.2016
+======================
+
+Kurzwiederholung
+----------------
+
+Gruppen:  Eine Gruppe besteht aus:
+
+  * einer Menge A,
+  * einer binären Funktion ⋄ und
+  * einer Äquivalenzrelation ≈,
+
+sodass:
+
+  * Geschlossenheit:
+    ⋄ : A² → A,
+
+  * Assoziativgesetz:
+    ∀ x y z. (x ⋄ y) ⋄ z ≈ x ⋄ (y ⋄ z),
+
+  * Neutrales Element (Identität):
+    ∃ id. ∀ x.
+        id ⋄ x ≈ x,
+        x ⋄ id ≈ x,
+
+  * Inverse:
+    ∀ x. ∃ y.
+        x ⋄ y ≈ id,
+        y ⋄ x ≈ id,
+
+  * Kongruenzgesetz:
+    ∀ x1 x2 y1 y2.
+        x1 ≈ x2, y1 ≈ y2
+        → x1 ⋄ y1 ≈ x2 ⋄ y2
+
+Beispiel für das letzte Gesetz:
+
+    3 ≈ 18, 4 ≈ 4
+    → 3 ⋄ 4 ≈ 18 ⋄ 4
+
+
+Gruppen-Morphismen
+------------------
+
+Gegeben:
+
+    G = (A, ⋄, ≈)
+    H = (B, ∘, ~)
+
+    f : A → B
+
+Die Funktion erfüllt folgende zwei Eigenschaften:
+
+  * f(idG) ~ idH
+  * ∀ x y.
+        f(x ⋄ y) ~ f(x) ∘ f(y)
+
+Funktionen mit diesen beiden Eigenschaften bezeichnen wir als
+*Gruppen-Morphismen* (Homomorphismen).  Wir schreiben:
+
+    f : G → H
+
+Sonderfall:
+
+    G = (A, ⋄, ≈)
+
+    id : G → G
+    id(x) = x
+
+ist ein Gruppen-Morphismus, weil:
+
+    id(idG) ≈ idG
+    ∀ x y. id(x ⋄ y) ≈ x ⋄ y
+           x ⋄ y ≈ id(x) ⋄ id(y)
+
+
+Produktgruppen
+--------------
+
+Gegeben sind zwei Gruppen:
+
+    G = (A, ⋄, ≈)
+    H = (B, ∘, ~)
+
+Wir definieren:
+
+    G × H = (A × B, !, ≡)
+
+    (x1, y1) ! (x2, y2) = (x1 ⋄ x2, y1 ∘ y2)
+
+    (x1, y1) ≡ (x2, y2) wenn:
+        x1 ≈ x2
+        y1 ~ y2
+
+
+Isomorphismen
+-------------
+
+Gegeben:
+
+    G = (A, ⋄, ≈)
+    H = (B, ∘, ~)
+
+    f : G → H
+
+Wenn ein Morphismus
+
+    g : H → G
+
+existiert, sodass:
+
+    ∀ x. g(f(x)) = x,
+         f(g(x)) = x,
+
+dann bezeichnen wir f und g als Isomorphismen.  Wir bezeichnen außerdem
+g als das Inverse von f, und f als das Inverse von g.
+
+Wir sagen außerdem, dass G und H isomorph sind.
+
+Beispiel:
+
+    exp : ℝ → ℝ+
+    exp(x) = e^x
+
+    ln : ℝ+ → ℝ
+    ln(e^x) = x
+
+exp und ln sind Morphismen,
+
+    exp : (ℝ, +, =) → (ℝ+, *, =)
+    ln  : (ℝ+, *, =) → (ℝ, +, =)
+
+genauer Isomorphismen:
+
+    ∀ x. ln(exp(x)) = x
+         exp(ln(x)) = x
+
+
+Der Chinesische Restsatz
+------------------------
+
+Auch: Chinese Remainder Theorem (CRT).
+
+Gegeben:
+
+    x ≡ y1 (mod n1)
+    x ≡ y2 (mod n2)
+
+sodass gcd(n1, n2) = 1.  Dann existiert eine Ganzzahl x, die diese
+beiden Äquivalenzen erfüllt.  Außerdem erfüllen x + k*n1*n2 für alle
+Ganzzahlen k diese Äquivalenzen auch.
+
+Beispiel 1:
+
+    x ≡ 3 (mod 5)
+    x ≡ 4 (mod 7)
+
+    → x ≡ 18 (mod (5*7))
+
+Und tatsächlich:
+
+    18 ≡ 3 (mod 5)
+    18 ≡ 4 (mod 7)
+
+Beispiel 2 (CRT umgekehrt):
+
+    x ≡ 20 (mod (5*7))
+
+    x ≡ 0 (mod 5)
+    x ≡ 6 (mod 7)
+
+Beispiel 3:
+
+    x ≡ 20 (mod 101)
+    x ≡ 30 (mod 127)
+
+    x ≡ 6888 (mod 12827)
+
+
+CRT-Lösungen finden
+-------------------
+
+Beispiel:
+
+    x ≡ 8 (mod 11)
+    x ≡ 2 (mod 17)
+
+Wir schreiben die Aussagen um in Gleichungen:
+
+    17*(x - 8) = k1*11*17
+    11*(x - 2) = k2*11*17
+
+    28*x - 158 = (k1 + k2)*11*17
+    28*x ≡ 158 (mod 11*17)
+    x ≡ 19 (mod 11*17)
+
+Allgemeine Form:
+
+    x ≡ y1 (mod n1)
+    x ≡ y2 (mod n2)
+
+Wir schreiben wieder um in Gleichungen:
+
+    x ≡ y1 (mod n1)
+    → x - y1 = k1*n1
+
+    x ≡ y2 (mod n2)
+    → x - y2 = k2*n2
+
+Wir formen die Gleichungen um:
+
+        x - y1  = k1*n1     | *n2
+    n2*(x - y1) = k1*n1*n2
+
+        x - y2  = k2*n2     | *n1
+    n1*(x - y2) = k2*n1*n2
+
+Wir addieren die resultierenden Gleichungen:
+
+    n2*(x - y1) = k1*n1*n2
+    n1*(x - y2) = k2*n1*n2
+
+    n2*(x - y1) + n1*(x - y2) = k1*n1*n2 + k2*n1*n2
+    n2*x - n2*y1 + n1*x - n1*y2 = k1*n1*n2 + k2*n1*n2
+    (n1 + n2)*x - n2*y1 - n1*y2 = (k1 + k2)*n1*n2
+    (n1 + n2)*x - (n2*y1 + n1*y2) = (k1 + k2)*n1*n2
+
+Die Gleichung ist in einer Form, die wir anders schreiben können:
+
+    (n1 + n2)*x ≡ n2*y1 + n1*y2 (mod n1*n2)      | / (n1 + n2)
+    x ≡ (n2*y1 + n1*y2) / (n1 + n2) (mod n1*n2)
+
+Beispiel:
+
+    x ≡ 3  (mod 47)
+    x ≡ 11 (mod 45)
+
+    x ≡ (45*3 + 47*11) / (47 + 45)  (mod 47*45)
+    x ≡ 191 (mod 47*45)
+
+
+CRT als Gruppen-Isomorphismus
+-----------------------------
+
+Rechenaufgabe:
+
+    x ≡ 34 * 63 (mod 77)
+
+Wir stellen fest:
+
+    x ≡ 0 (mod 7)
+    x ≡ -3 (mod 11)
+
+Und dann kehren wir zurück:
+
+    x ≡ -21 / 18  (mod 77)
+    x ≡ -21 * 30  (mod 77)
+    x ≡ 63  (mod 77)
