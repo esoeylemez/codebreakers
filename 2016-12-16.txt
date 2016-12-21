@@ -1,0 +1,215 @@
+
+Notizen vom 16.12.2016
+======================
+
+Kurzwiederholung: CRT
+---------------------
+
+Wir haben mehrere Moduli n1 und n2 und suchen für die folgenden
+Äquivalenzen eine gemeinsame Lösung für x:
+
+    x ≡ a1 (mod n1)
+    x ≡ a2 (mod n2)
+
+Es gibt unendlich viele Lösungen für x, die alle gleichwertig modulo
+n1*n2 sind.  Beispiel:
+
+    x ≡ 7  (mod 47)
+    x ≡ 12 (mod 41)
+
+Alternative Schreibweise:
+
+    ∃ (k1 ∈ ℤ).  x - 7  = k1*47
+    ∃ (k2 ∈ ℤ).  x - 12 = k2*41
+
+Lösungen:
+    x1 = 1652
+    x2 = 1652 + 47*41
+
+    x(n) = 1652 + n*47*41
+    x ≡ 1652 (mod 47*41)
+
+Umgekehrt:
+
+    x ≡ 1652 (mod 47*41)
+
+    x ≡ 7  (mod 47)
+    x ≡ 12 (mod 41)
+
+Einsatzbeispiel (ohne CRT):
+
+    x ≡ 2^17 (mod 41*47)
+      ≡ 2 * 2^16
+      ≡ 2 * 2^(2*8)
+      ≡ 2 * (2^2)^8
+      ≡ 2 * 4^8
+      ≡ 2 * 4^(2*4)
+      ≡ 2 * (4^2)^4
+      ≡ 2 * 16^4
+      ≡ 2 * (16^2)^2
+      ≡ 2 * 256^2
+      ≡ 2 * 18
+      ≡ 36
+
+Mit CRT ausgerechnet:
+
+    x ≡ 2^17 (mod 41*47)
+
+Ausführliche Schreibweise:
+
+    x ≡ 2^17 (mod 41)
+    x ≡ 2^17 (mod 47)
+
+Neue Kurzschreibweise:
+
+    x ≡ (2^17, 2^17)      (mod (41, 47))
+      ≡ (2 * 2^16, 2^17)
+      ≡ (2 * 4^8, 2^17)
+      ≡ (2 * 16^4, 2^17)
+      ≡ (2 * 256^2, 2^17)  | weil linke Komp. modulo 41:
+      ≡ (2 * 10^2, 2^17)
+      ≡ (2 * 18, 2^17)
+      ≡ (36, 2^17)
+      ≡ (36, 2 * 2^16)
+      ≡ (36, 2 * 4^8)
+      ≡ (36, 2 * 16^4)
+      ≡ (36, 2 * 21^2)
+      ≡ (36, 2 * 18)
+      ≡ (36, 36)
+
+Das heißt:
+
+    x ≡ 36 (mod 41)
+    x ≡ 36 (mod 47)
+
+Beispiel 2:
+
+    x ≡ 2^18     (mod 41*47)
+      ≡ (2^2)^9
+      ≡ 4^9
+      ≡ 4 * 4^8
+      ≡ 4 * 16^4
+      ≡ 4 * 256^2
+      ≡ 4 * 18
+      ≡ 72
+
+Mit CRT:
+
+    x ≡ (2^18, 2^18)  (mod (41, 47))
+      ≡ (4^9, 4^9)
+      ≡ (4 * 4^8, 4 * 4^8)
+      ≡ (4 * 16^4, 4 * 16^4)
+      ≡ (4 * 256^2, 4 * 256^2)
+      ≡ (4 * 10^2, 4 * 21^2)
+      ≡ (4 * 18, 4 * 18)
+      ≡ (31, 25)
+
+Das heißt:
+
+    x ≡ 31 (mod 41)
+    x ≡ 25 (mod 47)
+
+Wenn wir darauf CRT anwenden, dann:
+
+    x ≡ 72 (mod 41*47)
+
+
+Angriffe per CRT
+----------------
+
+Exkurs: Ein RSA-Schlüssel:
+
+    p = 14437
+    q = 35267
+    n = p*q = 509149679
+
+    ϕ(n) = (p - 1)*(q - 1) = 509099976
+
+    e = 17
+    d = 359364689
+    e*d ≡ 1 (mod ϕ(n))
+
+    Öffentlicher Schlüssel: (n, e)
+    Privater Schlüssel:     (n, d)
+
+    Verschlüsselung von x:  y ≡ x^e (mod n)
+    Entschlüsselung von y:  x ≡ y^d (mod n)
+
+Wie kann der CRT dem Angreifer helfen?
+
+    n = p*q = 3551
+
+Wir finden/bekommen ein x, sodass:
+
+    x ≡ (0, 2)  (mod (p, q))
+
+Ausführlicher:
+
+    x ≡ 0 (mod p)
+    x ≡ 2 (mod q)
+
+Beispiel:
+
+    x ≡ 1007 (mod n)
+
+Das bedeutet:  x ist ein Vielfaches von p.  Auch n ist ein Vielfaches
+von p.  Das bedeutet, x und n haben p als gemeinsamen Teiler.  Wir
+können den größten gemeinsamen Teiler von x und n berechnen und erhalten
+p.  q erhalten wir, indem wir n durch p teilen.
+
+Weiteres Beispiel:
+
+    n = 29612573
+
+Wir erhalten:
+
+    x ≡ 16760743  (mod n)
+
+mit der Zusatzinformation:
+
+    x ≡ (40, 0)  (mod (p, q))
+
+Das heißt:  x ist ein Vielfaches von q.  n ist auch ein Vielfaches von
+q.  Wir rechnen den größten gemeinsamen Teiler aus:
+
+    gcd(16760743, 29612573) = 4447 = q
+
+Wie könnten wir so eine Zahl x *finden*?
+
+Ansatz:  x = k*n, wobei k ∈ ℤ.  Wir erhalten:
+
+    x ≡ (0, 0)  (mod (p, q))
+    x ≡ 0  (mod n)
+
+    gcd(0, n) = n
+
+Schlägt fehl, weil 0 ein Vielfaches von p *und* q ist.  Das heißt, der
+ggT. von 0 und n ist einfach n.  Wir haben keinen *einzelnen* Teiler
+gefunden.
+
+Weitere Diskussion: Wir erhalten:
+
+    x ≡ 19717999 (mod n)
+
+mit der Zusatzinfo:
+
+    x ≡ (700, 1)  (mod (p, q))
+
+Wenn wir 1 abziehen:
+
+    x - 1 ≡ 19717998 (mod n)
+
+    x - 1 ≡ (700 - 1, 1 - 1)  (mod (p, q))
+          ≡ (699, 0)
+
+
+Pollard p - 1
+-------------
+
+Erinnerung:
+
+    ∀ x n.  x^ϕ(n) ≡ 1 (mod n), falls gcd(x, n) = 1
+
+Außerdem:
+
+    ∀ x e1 e2.  (x^e1)^e2 = x^(e1*e2)
