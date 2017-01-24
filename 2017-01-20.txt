@@ -1,0 +1,142 @@
+
+Notizen vom 20.01.2017
+======================
+
+Kurzwiederholung
+----------------
+
+Chinesischer Restsatz:
+  * n = 247 = 13 * 19
+              -------
+
+66 * 131 ≡ 1 (mod 247)
+
+(1, 9) * (1, -2)
+    ≡ (1, 1)  (mod (13, 19))
+    ≡ 1       (mod 247)
+
+(ℤ, +, ≡(mod (p*q)))
+  → (ℤ, +, ≡(mod p)) × (ℤ, +, ≡(mod q))
+
+(ℤ, +, ≡(mod 15))
+
+  ∀ x y z. (x + y) + z ≡
+           x + (y + z) (mod 15)
+
+  ∃ e. ∀ x. x + e ≡ x (mod 15),
+            e + x ≡ x (mod 15)
+
+  ∀ x. ∃ i. x + i ≡ e (mod 15),
+            i + x ≡ e (mod 15)
+
+Gruppen-Homomorphismen (o. Gruppen-Morphismen):
+
+    G = (A, ⋄, ≈)
+    H = (B, ∘, ~)
+
+    f : A → B
+
+    Strukturerhaltung:
+      * ∀ x y. f(x ⋄ y) ~ f(x) ∘ f(y)
+      * f(eA) ~ eB
+
+    f : G → H
+
+Exkurs:
+    (ℤ, +, =)    e = 0, -e = 0
+    (ℤ, *, =)    e = 1, 1^(-1) = 1
+    (A*, ++, =)  e = "", -"" = ""
+
+    e ⋄ e ≈ e
+
+    log : (ℝ+, *, =) → (ℝ, +, =)
+    log(1) = 0
+
+
+Produktgruppen:
+
+    G = (A, ⋄, ≈)
+    H = (B, ∘, ~)
+
+    G × H = (A × B, !, ≡)
+      wobei:
+      ! : (A × B) × (A × B) → (A × B)
+      (x1, y1) ! (x2, y2) = (x1 ⋄ x2, y1 ∘ y2)
+
+      ∀ x1 x2 y1 y2.
+          (x1, y1) ≡ (x2, y2) →
+          x1 ≈ x2, y1 ~ y2
+
+Exkurs:
+    ℤ, C
+    (3, 'a') ∈ (ℤ × C)
+
+
+Chinesischer Restsatz (CRT, algebraisch)
+----------------------------------------
+
+    factor : (ℤ, +, ≡(p*q)) → (ℤ, +, ≡p) × (ℤ, +, ≡q)
+    factor x = (x, x)
+    factor x = (x mod p, x mod q)
+
+    factor(x + y) = factor(x) + factor(y)
+    factor(0) = (0, 0)
+
+    crt : (ℤ, +, ≡p) × (ℤ, +, ≡q) → (ℤ, +, ≡(p*q))
+    crt(a1, a2) ≡ x
+        sodass:
+        a1 ≡ x (mod p)
+        a2 ≡ x (mod q)
+
+Die Funktionen crt und factor sind invers zueinander:
+
+    crt ∘ factor = id
+    factor ∘ crt = id
+
+factor und crt sind Gruppen-Morphismen sowohl für Addition als auch für
+Multiplikation:
+
+    crt(factor(66 * 131))
+      ≡ crt(factor(66) * factor(131))
+      ≡ crt((1, 9) * (1, -2))
+      ≡ crt(1, 1)
+      ≡ 1  (mod 13*19)
+
+Morphismen, die ein Inverses besitzen (z.B. crt und factor), bezeichnen
+wir als Isomorphismen.
+
+
+Faktorisierung per CRT
+----------------------
+
+Fall 1:
+
+n = 271171 = p*q
+x = 237228
+
+x ≡ 0 (mod p)
+∃ a1. x - 0 = a1*p
+
+p = gcd(n, x)
+
+
+Fall 2:
+
+n = 271171 = p*q
+x = 125789
+
+x ≡ 18 (mod q)
+→ x - 18 ≡ 0 (mod q)
+
+q = gcd(n, x - 18)
+
+
+Fall 2a:
+
+n = 271171 = p*q
+x = 90098
+
+x ≡ -50 (mod q)
+x + 50 ≡ 0 (mod q)
+
+q = gcd(n, x + 50)
