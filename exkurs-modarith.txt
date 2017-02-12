@@ -1,0 +1,168 @@
+
+Exkurs: Modulare Arithmetik
+===========================
+
+Gleichheit
+----------
+
+  * Reflexivität:  ∀ x.     x = x
+  * Symmetrie:     ∀ x y.   x = y → y = x
+  * Transitivität: ∀ x y z. (x = y, y = z) → x = z
+
+  * "Kongruenzgesetz":
+        ∀ (f : A → B) (x y ∈ A).
+            x = y → f(x) = f(y)
+
+
+### Beispiel für Kongruenz
+
+f(a) = a + 7
+x = 3 → f(x) = f(3) → x + 7 = 3 + 7
+
+g(a) = 5*a + 18
+x = 3 → 5*x + 18 = 5*3 + 18
+
+x = 3 → sqrt(x) - G = sqrt(3) - G
+
+
+Äquivalenzrelationen
+--------------------
+
+Eine Äquivalenzrelation ≈ über einer Menge A ist eine Familie von
+Aussagen der Form "x ≈ y" (mit x, y ∈ A) mit folgenden Eigenschaften:
+
+  * Reflexivität:  ∀ x.     x ≈ x
+  * Symmetrie:     ∀ x y.   x ≈ y → y ≈ x
+  * Transitivität: ∀ x y z. (x ≈ y, y ≈ z) → x ≈ z
+
+
+Beispiel:
+    ℤ = { …, -2, -1, 0, 1, 2, … }
+    Wir definieren x ≈P y ("x gleichwertig zu y"), genau wenn:
+      * x und y sind beide Primzahlen oder
+      * x und y sind beide nicht Primzahlen.
+
+    Gültige Aussagen:
+      * 3 ≈P 7, weil beide prim,
+      * 7 ≈P 31, weil beide prim,
+      * 10 ≈P 15, weil beide nicht prim,
+      * 4 ≈P 8, weil beide nicht prim,
+      * Nicht (2 ≈P 4), weil weder beide prim noch beide nicht prim.
+
+    Äquivalenzklassen:
+        ...nnnnnnnnnnnnnnnPPnPnPnnnPnPnnnPn...
+              -10  -5   0    5    10   15
+
+
+Beispiel: Gleichheit ("=") über ℤ
+    Gleichheit über ℤ ist eine Äquivalenzrelation.
+
+    Jedes Element ist allein in einer Klasse:
+        ...nljhfdbacegikmoq...
+             -5   0    5
+
+
+Beispiel:
+    Menge: ℤ
+
+    Wir definieren (x ≈T y), wenn folgende Bedingung erfüllt ist: 2 ist
+    prim.
+
+    Beispiele:
+      * 3 ≈T 5, weil 2 ist prim,
+      * 17 ≈T 21, weil 2 ist prim.
+
+    Ist das eine Äquivalenzrelation?
+      * Reflexiv:    ∀ x.     x ≈T x, weil 2 ist prim.
+      * Symmetrisch: ∀ x y.   x ≈T y → y ≈T x, weil 2 ist prim.
+      * Transitiv:   ∀ x y z. (x ≈T y, y ≈T z) → x ≈T z, weil 2 ist prim.
+
+    Eine einzige große Klasse:
+        ...XXXXXXXXXXXXXXXXXXXXXXX...
+           -10  -5   0    5    10
+
+
+Gegenbeispiel:
+    Menge: ℤ
+
+    Wir definieren: x ≈E y, genau wenn 4 prim ist.
+
+    Beispiele:
+      * Nicht 3 ≈E 7, weil 4 ist nicht prim.
+      * Nicht 3 ≈E 3, weil 4 ist nicht prim.
+
+    Keine Äquivalenzrelation!  Grund:
+      * Nicht reflexiv: nicht (∀ x. x ≈E x).
+
+    Keine Klassen:
+        .............................
+           -10  -5   0    5    10
+
+
+Beispiel:
+    Menge: ℚ
+
+    Wir definieren: x ≈S y, genau wenn:
+      * x ≥ 0 und y ≥ 0 oder
+      * x ≤ 0 und y ≤ 0.
+
+    Beispiele:
+      * 5 ≈S 7, weil 5 ≥ 0, 7 ≥ 0,
+      * Nicht (5 ≈S -7).
+      * 5 ≈S 0, weil (Bedingung 1).
+      * -7 ≈S 0, weil (Bedingung 2).
+      * 0 ≈S -7, weil symmetrisch.
+
+    Ist das eine Äquivalenzrelation?
+      * Reflexiv:    ∀ x.     x ≈S x
+      * Symmetrisch: ∀ x y.   x ≈S y → y ≈S x
+      * Nicht Transitiv!  (5 ≈S 0, 0 ≈S -7) → 5 ≈S -7
+
+    Keine Äquivalenzrelation (Überschneidung der Klassen):
+        ...nnnnnnnnnnXppppppppppp...
+           -10  -5   0    5    10
+
+
+Beispiel:
+    Menge: ℤ
+
+    Wir definieren: x ≡{12} y, genau wenn:
+      * ∃ (k ∈ ℤ). x - y = k*12
+
+    Beispiel:
+      * Nicht (5 ≡{12} 9), weil 5 - 9 = -4.
+      * -3 ≡{12} 9, weil: -3 - 9 = -12, k = -1.
+      * 4 ≡{12} 4, weil: 4 - 4 = 0, k = 0.
+      * 9 ≡{12} -3, weil: 9 - (-3) = 12, k = 1.
+      * 9 ≡{12} 33, weil: 9 - 33 = -24, k = -2.
+      * -3 ≡{12} 33, weil: -3 - 33 = -36, k = -3.
+      * 0 ≡{12} 12, k = -1.
+      * 0 ≡{12} 24, k = -2.
+
+    Äquivalenzrelation?
+      * Reflexiv.
+      * Symmetrisch.
+      * Transitiv.
+
+         a           a           a           a
+          b           b           b
+           c           c           c
+        l   defghijkl   defghijkl   defghijkl
+        ...|....|....|....|....|....|....|....
+           -10  -5   0    5    10   15   20
+
+
+Beispiel:
+    Menge: ℤ, n ∈ ℕ, n > 0
+
+    Definition: x ≡ y (mod n), genau wenn:
+      * ∃ (k ∈ ℤ). x - y = k*n
+
+    Beispiele:
+      * 3 ≡ 18 (mod 5), weil k = -3.
+      * Nicht (7 ≡ 8 (mod 2)), weil kein k mit k*2 = -1.
+      * 7 ≡ 8 (mod n), nur wenn n = 1, weil:
+            7 - 8 = -1 = k*n.
+
+3 + 8 ≡ 1 (mod 5)
+3 + (-2) ≡ 1 (mod 5)
