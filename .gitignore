@@ -2,3 +2,6 @@
 /code/TAGS
 default.nix
 shell.nix
+TAGS
+*.hi
+*.o
