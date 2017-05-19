@@ -1,0 +1,159 @@
+
+Notizen vom 28.04.2017
+======================
+
+Kurzwiederholung
+----------------
+
+n = p*q
+b^(ϕ(p)*v) - 1 ≡ 0 (mod p)
+
+n = 14437 * 38303 = 552980411
+2^(14436*v) - 1 ≡ 0 (mod p)
+
+Was passiert, wenn eine Komponente 0 wird?
+2^14436 - 1
+  ≡ (2^14436 - 1, 2^14436 - 1) (mod (p, q))
+  ≡ (0,           2^14436 - 1) (mod (p, q))
+Resultierende Zahl hat den Faktor p mit n gemeinsam.
+
+2^(14436*v) - 1 ≡ 0          (mod p)
+  ≡ 2^(2^2 * 3^2 * 401 * v)  (mod p)
+
+Was passiert, wenn wir zu viele Faktoren multiplizieren?
+    2^(2^3 * 3^2 * 11 * 401 * 1741) - 1
+      ≡ (0, 0) (mod n)
+
+    2^(ϕ(n)*v) - 1 ≡ 0 (mod n)
+
+Pathologischer Fall:
+    p = 1752371
+    q = 2011417
+    n = 3524748819707
+
+    ϕ(p) = 1752370
+    ϕ(q) = 2011416
+
+    2^ϕ(p) - 1
+      ≡ (2^ϕ(p) - 1, 2^ϕ(p) - 1)  (mod (p, q))
+      ≡ (0,          2^ϕ(p) - 1)  (mod (p, q))
+
+    2^(401!) - 1
+      ≡ (0, 2^(401!) - 1)  (mod (p, q))
+      ≡ (0, 0)
+
+Euler (?), verallgemeinert Fermat:
+∀ (x n ∈ ℤ).
+    n ≥ 2, gcd(x, n) = 1 →
+    x^ϕ(n) ≡ 1 (mod n)
+
+Kleiner Satz von Fermat:
+∀ (x p ∈ ℤ).
+    Prim(p), x ≢ 0 (mod p) →
+    x^(p - 1) ≡ 1 (mod p)
+
+
+Beispiel:
+    n = 18406058579
+    n = p*q
+
+    2^(ϕ(p)*v)
+      ≡ (2^(ϕ(p)*v), 2^(ϕ(p)*v))  (mod (p, q))
+      ≡ (1,          2^(ϕ(p)*v))  (mod (p, q))
+
+    ϕ(p) = p1 * p2 * … * pN  (aufsteigend)
+
+    Wir kennen pN nicht.  Daher raten wir:
+        2^(1!) - 1 ≢ 0 (mod p)
+        2^(2!) - 1 ≢ 0 (mod p)
+        ...
+        2^(1117!) - 1 ≡ 0 (mod p)
+
+    D.h.: Wir beginnen mit x = 1 und probieren es mit
+    folgender Zahl,
+        y = (2^(x!) - 1) mod n
+    bis:
+        gcd(y, n) ≠ 1
+
+1117! = ϕ(p) * v
+
+
+RSA-Optimierung durch CRT:
+    RSA-Kurzwiederholung:
+    n = p*q
+
+    e*d ≡ 1 (mod ϕ(n))
+
+    x^(e*d) ≡ x (mod n)
+
+    y ≡ x^e (mod n)
+    x ≡ y^d (mod n)
+
+    Optimierung:
+    x ≡ (y^d, y^d) (mod (p, q))
+
+    1. Rechnen modulo der einzelnen Primfaktoren,
+    2. Reduktion von d zu (d mod ϕ(p)) und (d mod ϕ(q))
+
+Beispiel:
+    p = 101
+    q = 127
+    n = 12827
+    ϕ(n) = 12600
+
+    e = 11
+    d = 2291
+
+    x = 50
+    y = 12239
+
+    Unoptimierte Entschlüsselung:
+      x ≡ y^2291 (mod n)
+
+    Optimierte Entschlüsselung:
+      ϕ(p) = p - 1 = 100
+      ϕ(q) = q - 1 = 126
+
+      dP = 91
+      dQ = 23
+
+      x ≡ (y^2291, y^2291) (mod (p, q))
+        ≡ (y^91,   y^23)   (mod (p, q))
+
+
+MysteryTwister-Challenge
+========================
+
+https://www.mysterytwisterc3.org/en/challenges/level-ii/smartcard-rsa
+
+Gegeben:
+    n = 75489763393055314128289985760068186621492280562287920094260074153209517236970341572518559797153344946557614545420102689128360149448826277159732843552885090712289384951797592094776916869951359415795387573058732394347634041226477604151022089442263032171551224119059291246759481118626066831025730728959763973939
+    e = 46933839936513203806814534785430440399121060041961563534238921289223215886833155748923329942768184793127030357335234488752951998951952300752961654791044921714986192071286036662233822586116573773834895955581767885885461402578281187712069245154703440996167817002215606658260574029353837097272922247982958120199
+    y = 17303115588385783231855542914594436033706210611592142994148195847161380369694148898294321316619889161465646741342622951747792020391919396377166600390042691916460332038663202841616005426744660399537915742224300757610350068952082197457369985659556824400134147883343181884291377763582387957067404145280221333702
+
+plus Zusatzinfo:
+    dP und dQ sind klein
+
+Erste Überlegungen:
+    x ≡ (y^dP, y^dQ)  (mod (p, q))
+
+    y ≡ x^e (mod n)
+
+Ansatz:
+    Zu dP existiert ein entsprechendes eP, sodass:
+    eP*dP ≡ 1 (mod ϕ(p))
+
+    x^e
+      ≡ (x^e,  x^e)  (mod (p, q))
+      ≡ (x^eP, x^eQ) (mod (p, q))
+
+    (x^e)^dP
+      ≡ ((x^eP)^dP, (x^eQ)^dP)  (mod (p, q))
+      ≡ (x^(eP*dP), (x^eQ)^dP)  (mod (p, q))
+      ≡ (x^1,       (x^eQ)^dP)  (mod (p, q))
+      ≡ (x,         (x^eQ)^dP)  (mod (p, q))
+
+Lösung:
+    (2^e)^dP - 2 ≡ (0, (2^e)^dP - 2)  (mod (p, q))
+
+    p = gcd((2^e)^dP mod n - 2, n)
